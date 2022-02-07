@@ -29,7 +29,6 @@ void Display::Getalpha(string userinput) {
 
 }
 
-
 int main() {  
     Calculations Calc;
     string userinput;
