@@ -1,39 +1,95 @@
 #include <iostream>
 using std::string; using std::cout; using std::cin;
 
+class Display {
+public:
+    void Getui(string);
+    void Statement(string);
+    string userinputs() { return userinput; }
+private:
+    string userinput{};
+};
+
+void Display::Getui(string question) {
+    cout << question;
+    cin >> userinput;
+}
+
+void Display::Statement(string statement) {
+    cout << statement;
+}
+
 class Calculations {
+    friend class Display;
 public:
     void Setvalue(string);
+    void Position();
+    void Printarray();
     int elements() { return element; }
-    int rows() { return row; }
+    int rows() { return rownum; }
 private:
-    string alphabet[26] = { "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z" };  
-    int element{}, row{};
+    string alphabet[26] = { "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z" };
+    int element{}, rownum{}; string alphaelement;
 };
 
 void Calculations::Setvalue(string userinput) {
     for (int i = 25; i >= 0; i--) {
         if (alphabet[i] == userinput) {
+            alphaelement = userinput;
             element = i;
-            row = (element * 2) + 1;
+            rownum = (element * 2) + 1;
         }
     }
 }
 
-class Display {
-public:
-    void Getalpha(string);
-};
-
-void Display::Getalpha(string userinput) {
-
+void Calculations::Printarray() {
+    int counter = 0; bool userinputhit = false;
+      for (int i = 0; i <= rownum; i++) {
+           if (alphabet[counter] == alphaelement) {
+               userinputhit = true;
+           }
+           if (userinputhit == false){
+               counter += 1;
+           }
+           else {
+               counter -= 1;
+           }
+        }
+}
+void Calculations::Position(){
+    int i, j,space;
+    space = rownum - 1;
+    for (i = 1; i <= rownum; i++)
+    {
+        for (j = 1; j <= space; j++)
+            cout << " ";
+        space--;
+        for (j = 1; j <= (2 * i - 1); j++)
+            cout << "*";
+        cout << std::endl;
+    }
+    space = 1;
+    for (i = 1; i <= (rownum - 1); i++)
+    {
+        for (j = 1; j <= space; j++)
+            cout << " ";
+        space++;
+        for (j = 1; j <= (2 * (rownum - i) - 1); j++)
+            cout << "*";
+        cout << std::endl;
+    }
+    cout << std::endl;
 }
 
-int main() {  
-    Calculations Calc;
-    string userinput;
-    cout << "Enter alphabet: "; cin >> userinput;
+
+int main() {
+    string userinput; string question; string statement;
+    Calculations Calc; Display Disp;
+    Disp.Getui(question = "Enter alphabet: ");
+    Calc.Setvalue(Disp.userinputs());
     Calc.Setvalue(userinput);
     cout << "Element: " << Calc.elements();
+    Calc.Printarray();
+    Calc.Position();
     return 0;
 }
