@@ -37,7 +37,7 @@ void Calculations::Setvalue(string userinput) {
         if (alphabet[i] == userinput) {
             alphaelement = userinput;
             element = i;
-            rownum = (element * 2) + 1;
+            rownum = (element * 2) + 1 ;
         }
     }
 }
@@ -57,25 +57,26 @@ void Calculations::Printarray() {
         }
 }
 void Calculations::Position(){
-    int i, j,space;
-    space = rownum - 1;
-    for (i = 1; i <= rownum; i++)
+    int i, j,space, upperquad;
+    upperquad = element + 1;
+    space = element;
+    for (i = 1; i <= upperquad; i++)
     {
         for (j = 1; j <= space; j++)
             cout << " ";
         space--;
         for (j = 1; j <= (2 * i - 1); j++)
-            cout << "*";
+            cout << "A";
         cout << std::endl;
     }
     space = 1;
-    for (i = 1; i <= (rownum - 1); i++)
+    for (i = 1; i <= (upperquad - 1); i++)
     {
         for (j = 1; j <= space; j++)
             cout << " ";
         space++;
-        for (j = 1; j <= (2 * (rownum - i) - 1); j++)
-            cout << "*";
+        for (j = 1; j <= (2 * (upperquad - i) - 1); j++)
+            cout << "B";
         cout << std::endl;
     }
     cout << std::endl;
@@ -88,7 +89,9 @@ int main() {
     Disp.Getui(question = "Enter alphabet: ");
     Calc.Setvalue(Disp.userinputs());
     Calc.Setvalue(userinput);
+    /*
     cout << "Element: " << Calc.elements();
+    */
     Calc.Printarray();
     Calc.Position();
     return 0;
