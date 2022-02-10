@@ -1,42 +1,19 @@
 #include <iostream>
 using std::string; using std::cout; using std::cin;
-
-class Display {
-public:
-    void Getui(string);
-    void Statement(string);
-    string userinputs() { return userinput; }
-private:
-    string userinput{};
-};
-
-void Display::Getui(string question) {
-    cout << question;
-    cin >> userinput;
-}
-
-void Display::Statement(string statement) {
-    cout << statement;
-}
-
 class Calculations {
-    friend class Display;
 public:
     void Setvalue(string);
     void Position();
-    int elements() { return element; }
-    int rows() { return rownum; }
 private:
     string alphabet[26] = { "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z" };
-    int element{}, rownum{}; string alphaelement;
+    int element{};
+    int elements() { return element; }
 };
 
 void Calculations::Setvalue(string userinput) {
     for (int i = 25; i >= 0; i--) {
         if (alphabet[i] == userinput) {
-            alphaelement = userinput;
             element = i;
-            rownum = (element * 2) + 1;
         }
     }
 }
@@ -57,12 +34,12 @@ void Calculations::Position() {
         if (i != 1) {
             cout << alphabet[counter];
         }
-        cout << std::endl;
+        cout << "\n";
     }
-    space = 1;
+    space = 1; counter = 0;
     for (i = 1; i <= (upperquad - 1); i++)
     {
-        counter--;
+        counter++;
         for (j = 1; j <= space; j++)
             cout << " ";
         space++;
@@ -72,17 +49,14 @@ void Calculations::Position() {
         if (i != element) {
             cout << alphabet[counter];
         }
-        cout << std::endl;
+        cout << "\n";
     }
-    cout << std::endl;
+    cout << "\n";
 }
 
 int main() {
-    string userinput; string question; string statement;
-    Calculations Calc; Display Disp;
-    Disp.Getui(question = "Enter alphabet: ");
-    Calc.Setvalue(Disp.userinputs());
+    string userinput;Calculations Calc;
+    cout << "Enter alphabet:";cin >> userinput;
     Calc.Setvalue(userinput);
     Calc.Position();
-    return 0;
 }
