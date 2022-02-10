@@ -24,7 +24,6 @@ class Calculations {
 public:
     void Setvalue(string);
     void Position();
-    void Printarray();
     int elements() { return element; }
     int rows() { return rownum; }
 private:
@@ -42,49 +41,36 @@ void Calculations::Setvalue(string userinput) {
     }
 }
 
-void Calculations::Printarray() {
-    int counter = 0; bool userinputhit = false;
-    for (int i = 0; i <= rownum; i++) {
-        if (alphabet[counter] == alphaelement) {
-            userinputhit = true;
-        }
-        if (userinputhit == false) {
-            counter += 1;
-        }
-        else {
-            counter -= 1;
-        }
-    }
-}
-
 void Calculations::Position() {
-    int i, j, space, upperquad;
+    int i, j, space, upperquad, counter = -1;
     upperquad = element + 1;
     space = element;
     for (i = 1; i <= upperquad; i++)
     {
+        counter++;
         for (j = 1; j <= space; j++)
             cout << " ";
         space--;
-        cout << "B";
+        cout << alphabet[counter];
         for (j = 1; j <= (2 * i - 3); j++)
             cout << " ";
         if (i != 1) {
-            cout << "B";
+            cout << alphabet[counter];
         }
         cout << std::endl;
     }
     space = 1;
     for (i = 1; i <= (upperquad - 1); i++)
     {
+        counter--;
         for (j = 1; j <= space; j++)
             cout << " ";
         space++;
-        cout << "B";
+        cout << alphabet[counter];
         for (j = 1; j <= (2 * (upperquad - i) - 3); j++)
             cout << " ";
         if (i != element) {
-            cout << "B";
+            cout << alphabet[counter];
         }
         cout << std::endl;
     }
@@ -97,7 +83,6 @@ int main() {
     Disp.Getui(question = "Enter alphabet: ");
     Calc.Setvalue(Disp.userinputs());
     Calc.Setvalue(userinput);
-    Calc.Printarray();
     Calc.Position();
     return 0;
 }
