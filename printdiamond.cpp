@@ -41,7 +41,7 @@ void Calculations::Position() {
             cout << " ";
         space++;
         cout << alphabet[i-1];
-        for (j = 1; j <= (2 * (i+1 - 1) - 3); j++)
+        for (j = 1; j <= (2 * i - 3); j++)
             cout << " ";
         if (i != 1) {
             cout << alphabet[i-1];
